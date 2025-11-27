@@ -1,0 +1,34 @@
+hello.js
+
+function hello() {
+  return 'Hello from JS';
+}
+
+hello.feature
+
+
+Feature: Run JavaScript file and assert result
+
+Scenario: call hello() from hello.js
+  # load the JS module relative to this feature's folder
+  * def mod = read('hello.js')
+  # call function defined inside hello.js
+  * def result = mod.hello()
+  # assertion
+  * match result == 'Hello from JS'
+
+
+
+
+  KarateRunner.java
+
+  package karate;
+
+import com.intuit.karate.junit5.Karate;
+
+class KarateRunner {
+    @Karate.Test
+    Karate testAll() {
+        return Karate.run("hello").relativeTo(getClass());
+    }
+}
